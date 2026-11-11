@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คำถามที่พบบ่อย | Phone Sticker Store</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    body {
+      background: #fff9fc;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    header {
+      background: white;
+      padding: 17px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f5eaf0;
+      gap: 15px;
+    }
+
+    .logo {
+      color: #df78a6;
+      font-size: 21px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #333;
+    }
+
+    .back-link {
+      color: #888;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: #df78a6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .hero-icon {
+      width: 75px;
+      height: 75px;
+      background: #ffeaf3;
+      color: #df78a6;
+      border-radius: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 15px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 53px;
+      border: 1px solid #f1e4eb;
+      border-radius: 13px;
+      padding: 0 50px 0 18px;
+      outline: none;
+      font-size: 14px;
+      background: white;
+    }
+
+    .search-box input:focus {
+      border-color: #e99abc;
+      box-shadow: 0 0 0 3px rgba(233,154,188,.1);
+    }
+
+    .search-box i {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #d875a0;
+    }
+
+    .category-title {
+      font-size: 17px;
+      font-weight: 500;
+      margin: 27px 0 13px;
+      color: #d875a0;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid #f5eaf0;
+      border-radius: 12px;
+      margin-bottom: 11px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(200,120,155,.03);
+    }
+
+    .faq-question {
+      width: 100%;
+      border: none;
+      background: white;
+      padding: 17px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      gap: 15px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .faq-question:hover {
+      background: #fffafd;
+    }
+
+    .faq-question i {
+      color: #df78a6;
+      transition: transform .25s;
+    }
+
+    .faq-item.active .faq-question {
+      color: #d875a0;
+      font-weight: 500;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.9;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-answer a {
+      color: #d875a0;
+      text-decoration: none;
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 35px;
+      color: #aaa;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #f5eaf0;
+    }
+
+    .no-results i {
+      display: block;
+      font-size: 30px;
+      color: #e9b3cb;
+      margin-bottom: 12px;
+    }
+
+    .contact-card {
+      background: linear-gradient(135deg, #ffeaf3, #fff5f9);
+      border-radius: 17px;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 35px;
+    }
+
+    .contact-card h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 7px;
+    }
+
+    .contact-card p {
+      color: #987187;
+      font-size: 13px;
+      margin-bottom: 17px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: #e88fb5;
+      color: white;
+      text-decoration: none;
+      padding: 10px 23px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .contact-btn:hover {
+      background: #dc78a4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #bbb;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .container {
+        margin: 30px auto;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .faq-question {
+        padding: 15px;
+      }
+
+      .faq-answer {
+        padding: 0 15px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-heart"></i>
+      Phone <span>Sticker Store</span>
+    </a>
+
+    <a href="index.html" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i>
+      กลับหน้าหลัก
+    </a>
+  </header>
+
+  <main class="container">
+
+    <div class="hero">
+      <div class="hero-icon">
+        <i class="fa-regular fa-circle-question"></i>
+      </div>
+      <h1>คำถามที่พบบ่อย</h1>
+      <p>ค้นหาคำตอบเกี่ยวกับการใช้งานและการสั่งซื้อสินค้า</p>
+    </div>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="faqSearch"
+        placeholder="ค้นหาคำถาม เช่น การชำระเงิน..."
+      >
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <div id="faqList">
+
+      <!-- หมวดหมู่สินค้า -->
+      <h2 class="category-title">สินค้าและผลิตภัณฑ์</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Phone Sticker คืออะไร?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          Phone Sticker คือสติกเกอร์สำหรับตกแต่งโทรศัพท์มือถือ
+          ช่วยเพิ่มความสวยงามและสร้างเอกลักษณ์ให้กับอุปกรณ์ของคุณ
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          สินค้าสามารถใช้กับโทรศัพท์ทุกรุ่นได้ไหม?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          ขึ้นอยู่กับประเภทสินค้าและขนาดของอุปกรณ์
+          กรุณาตรวจสอบรายละเอียดและขนาดสินค้าก่อนสั่งซื้อ
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          สินค้ามีประกันหรือไม่?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          เงื่อนไขการรับประกันขึ้นอยู่กับสินค้าแต่ละประเภท
+          กรุณาตรวจสอบรายละเอียดสินค้าหรือติดต่อร้านค้าก่อนสั่งซื้อ
+        </div>
+      </div>
+
+      <!-- การสั่งซื้อ -->
+      <h2 class="category-title">การสั่งซื้อสินค้า</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          สามารถสั่งซื้อสินค้าได้อย่างไร?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          เลือกสินค้าที่ต้องการ เพิ่มลงในตะกร้า
+          จากนั้นตรวจสอบรายการสินค้าและกรอกข้อมูลจัดส่งในหน้า Checkout
+          ก่อนยืนยันคำสั่งซื้อ
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          จำเป็นต้องสมัครสมาชิกก่อนสั่งซื้อไหม?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          การใช้งานบัญชีสมาชิกช่วยให้คุณจัดการข้อมูลส่วนตัว
+          และตรวจสอบประวัติคำสั่งซื้อได้สะดวกยิ่งขึ้น
+          เงื่อนไขการสั่งซื้อขึ้นอยู่กับระบบที่ร้านค้าเปิดใช้งาน
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ตรวจสอบคำสั่งซื้อได้ที่ไหน?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          สามารถตรวจสอบได้ที่หน้า
+          <a href="orders.html">ประวัติคำสั่งซื้อ</a>
+          หลังเข้าสู่ระบบ
+        </div>
+      </div>
+
+      <!-- การชำระเงิน -->
+      <h2 class="category-title">การชำระเงิน</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          สามารถชำระเงินด้วยวิธีใดได้บ้าง?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          ช่องทางการชำระเงินจะแสดงในหน้า Checkout
+          เช่น การชำระผ่าน QR Code หรือช่องทางอื่นที่ร้านค้าเปิดให้บริการจริง
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ชำระเงินแล้วต้องทำอย่างไร?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          กรุณาเก็บหลักฐานการชำระเงินไว้
+          และตรวจสอบสถานะคำสั่งซื้อในระบบ
+          คำสั่งซื้อจะถือว่าชำระเงินสำเร็จเมื่อระบบหรือร้านค้าตรวจสอบยอดเงินแล้ว
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          หากชำระเงินแล้วแต่สถานะยังไม่เปลี่ยนต้องทำอย่างไร?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          กรุณารอสักครู่แล้วตรวจสอบอีกครั้ง
+          หากสถานะยังไม่เปลี่ยน ให้ติดต่อร้านค้าพร้อมหมายเลขคำสั่งซื้อและหลักฐานการชำระเงิน
+        </div>
+      </div>
+
+      <!-- การจัดส่ง -->
+      <h2 class="category-title">การจัดส่งสินค้า</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ใช้เวลาจัดส่งกี่วัน?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          ระยะเวลาจัดส่งขึ้นอยู่กับผู้ให้บริการขนส่ง
+          และพื้นที่ปลายทาง โดยจะแจ้งรายละเอียดตามช่องทางที่ร้านค้ากำหนด
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          สามารถเปลี่ยนที่อยู่หลังสั่งซื้อได้ไหม?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          กรุณาติดต่อร้านค้าโดยเร็วที่สุด
+          การเปลี่ยนแปลงที่อยู่ขึ้นอยู่กับสถานะการจัดเตรียมและการจัดส่งสินค้า
+        </div>
+      </div>
+
+      <!-- การคืนสินค้า -->
+      <h2 class="category-title">การคืนสินค้าและปัญหา</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          หากได้รับสินค้าเสียหายต้องทำอย่างไร?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          กรุณาถ่ายภาพหรือวิดีโอสินค้าและบรรจุภัณฑ์
+          พร้อมแจ้งหมายเลขคำสั่งซื้อผ่านหน้า
+          <a href="contact.html">ติดต่อเรา</a>
+          เพื่อให้ร้านค้าตรวจสอบและดำเนินการตามนโยบาย
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          สามารถยกเลิกคำสั่งซื้อได้หรือไม่?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          สามารถแจ้งความประสงค์ยกเลิกได้โดยติดต่อร้านค้า
+          ทั้งนี้ขึ้นอยู่กับสถานะคำสั่งซื้อและเงื่อนไขการให้บริการ
+          โดยไม่ตัดสิทธิตามกฎหมายของผู้บริโภค
+        </div>
+      </div>
+
+    </div>
+
+    <div id="noResults" class="no-results">
+      <i class="fa-solid fa-face-frown"></i>
+      ไม่พบคำถามที่ตรงกับการค้นหา
+      <p>ลองใช้คำค้นหาอื่นอีกครั้ง</p>
+    </div>
+
+    <div class="contact-card">
+      <h2>ยังมีข้อสงสัยเพิ่มเติม?</h2>
+      <p>ทีมงานพร้อมช่วยเหลือคุณ ติดต่อเราได้ที่นี่</p>
+      <a href="contact.html" class="contact-btn">
+        <i class="fa-solid fa-headset"></i>
+        ติดต่อเรา
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Phone Sticker Store. All rights reserved.
+  </footer>
+
+  <script>
+
+    // เปิด/ปิดคำตอบ
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+
+      const question = item.querySelector(".faq-question");
+
+      question.addEventListener("click", () => {
+
+        const isActive = item.classList.contains("active");
+
+        // ปิดหัวข้ออื่นก่อน
+        faqItems.forEach(other => {
+          other.classList.remove("active");
+          other.querySelector(".faq-question")
+            .setAttribute("aria-expanded", "false");
+        });
+
+        // เปิดหัวข้อที่เลือก
+        if (!isActive) {
+          item.classList.add("active");
+          question.setAttribute("aria-expanded", "true");
+        }
+
+      });
+
+    });
+
+    // ระบบค้นหาคำถาม
+    const searchInput = document.getElementById("faqSearch");
+    const faqList = document.getElementById("faqList");
+    const noResults = document.getElementById("noResults");
+
+    searchInput.addEventListener("input", () => {
+
+      const keyword = searchInput.value.trim().toLowerCase();
+      let found = 0;
+
+      document.querySelectorAll(".category-title").forEach(title => {
+        title.style.display = "none";
+      });
+
+      faqItems.forEach(item => {
+
+        const text = item.textContent.toLowerCase();
+        const matched = text.includes(keyword);
+
+        item.style.display = matched ? "block" : "none";
+
+        if (matched) {
+          found++;
+
+          // แสดงหัวข้อหมวดหมู่ของคำถามที่พบ
+          let previous = item.previousElementSibling;
+
+          while (previous) {
+            if (previous.classList.contains("category-title")) {
+              previous.style.display = "block";
+              break;
+            }
+            previous = previous.previousElementSibling;
+          }
+
+        } else {
+          item.classList.remove("active");
+          item.querySelector(".faq-question")
+            .setAttribute("aria-expanded", "false");
+        }
+
+      });
+
+      noResults.style.display = found === 0 ? "block" : "none";
+      faqList.style.display = found === 0 ? "none" : "block";
+
+    });
+
+  </script>
+
+</body>
+</html>
