@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสินค้า | Phone Sticker Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Kanit', sans-serif;
+            background: #fffafd;
+            color: #302630;
+        }
+
+        header {
+            background: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f5e8ef;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+            color: #e78bb5;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #51434d;
+            font-size: 14px;
+        }
+
+        .login {
+            background: #f5a8ca;
+            color: white;
+            padding: 9px 20px;
+            border-radius: 30px;
+        }
+
+        .breadcrumb {
+            width: 86%;
+            margin: 25px auto;
+            color: #9c8491;
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #d979a7;
+            text-decoration: none;
+        }
+
+        .product-container {
+            width: 86%;
+            margin: 20px auto 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 55px;
+        }
+
+        .gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            background: #ffeaf3;
+            border-radius: 24px;
+        }
+
+        .thumbnail-list {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .thumbnail.active {
+            border-color: #e78bb5;
+        }
+
+        .product-info {
+            padding: 10px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #fce5f0;
+            color: #d16d9c;
+            padding: 5px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .product-info h1 {
+            font-size: 32px;
+            margin: 15px 0 8px;
+        }
+
+        .rating {
+            color: #e7a94d;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #e77eae;
+            font-size: 30px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .description {
+            color: #82717b;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #f1e5ec;
+            margin: 22px 0;
+        }
+
+        .stock {
+            color: #4da67b;
+            font-size: 13px;
+        }
+
+        .quantity-area {
+            margin-top: 25px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .quantity-control button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid #f0d8e4;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .quantity-control input {
+            width: 55px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .add-cart, .buy-now {
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 15px;
+            flex: 1;
+        }
+
+        .add-cart {
+            background: #fce5f0;
+            color: #c45e91;
+        }
+
+        .buy-now {
+            background: #e987b5;
+            color: white;
+        }
+
+        .add-cart:hover {
+            background: #f5b6d1;
+            color: white;
+        }
+
+        .buy-now:hover {
+            background: #d975a5;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid #f4e6ed;
+            border-radius: 14px;
+            padding: 15px 8px;
+            text-align: center;
+            font-size: 12px;
+            color: #806e78;
+        }
+
+        .feature span {
+            display: block;
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .details-section {
+            width: 86%;
+            margin: 0 auto 60px;
+            background: white;
+            border: 1px solid #f3e7ed;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .details-section h2 {
+            font-size: 21px;
+        }
+
+        .details-section p {
+            color: #82717b;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        footer {
+            background: white;
+            border-top: 1px solid #f5e8ef;
+            text-align: center;
+            padding: 30px;
+            color: #907b88;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #40343c;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 30px;
+            opacity: 0;
+            transition: .3s;
+            z-index: 20;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media(max-width: 850px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .main-image {
+                height: 350px;
+            }
+
+            .product-info h1 {
+                font-size: 27px;
+            }
+        }
+
+        @media(max-width: 520px) {
+            header {
+                padding: 13px 5%;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            nav a:not(.login) {
+                display: none;
+            }
+
+            .breadcrumb, .product-container, .details-section {
+                width: 92%;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .features {
+                gap: 7px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">♡ Phone Sticker</a>
+
+    <nav>
+        <a href="index.html">หน้าร้าน</a>
+        <a href="index.html#categories">หมวดหมู่</a>
+        <a href="cart.html">ตะกร้า 🛒 <span id="cart-count">0</span></a>
+        <a href="login.html" class="login">เข้าสู่ระบบ</a>
+    </nav>
+</header>
+
+<div class="breadcrumb">
+    <a href="index.html">หน้าร้าน</a> / รายละเอียดสินค้า
+</div>
+
+<main class="product-container">
+
+    <section class="gallery">
+        <img id="main-image" class="main-image" src="" alt="รูปสินค้า">
+
+        <div class="thumbnail-list" id="thumbnail-list"></div>
+    </section>
+
+    <section class="product-info">
+
+        <span class="tag" id="category">สินค้าแนะนำ</span>
+
+        <h1 id="product-name">กำลังโหลดสินค้า...</h1>
+
+        <div class="rating">★★★★★ <span style="color:#a18d98">สินค้าแนะนำ</span></div>
+
+        <div class="price" id="product-price">฿0</div>
+
+        <p class="description" id="product-description"></p>
+
+        <div class="divider"></div>
+
+        <div class="stock" id="stock-text">● มีสินค้า</div>
+
+        <div class="quantity-area">
+            <strong>จำนวนสินค้า</strong>
+
+            <div class="quantity-control">
+                <button onclick="changeQuantity(-1)">−</button>
+                <input type="number" id="quantity" value="1" min="1" max="10" readonly>
+                <button onclick="changeQuantity(1)">+</button>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="add-cart" onclick="addToCart()">
+                🛒 เพิ่มลงตะกร้า
+            </button>
+
+            <button class="buy-now" onclick="buyNow()">
+                ซื้อสินค้าเลย →
+            </button>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <span>📦</span>
+                แพ็กสินค้าอย่างดี
+            </div>
+
+            <div class="feature">
+                <span>🚚</span>
+                จัดส่งถึงบ้าน
+            </div>
+
+            <div class="feature">
+                <span>💗</span>
+                ดูแลหลังการขาย
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<section class="details-section">
+    <h2>รายละเอียดสินค้า</h2>
+    <p id="full-description"></p>
+
+    <div class="divider"></div>
+
+    <h2>ข้อมูลเพิ่มเติม</h2>
+    <p>
+        Phone Sticker Store คัดสรรอุปกรณ์สำหรับผู้สร้างคอนเทนต์
+        เน้นความสะดวก พกพาง่าย และช่วยให้คุณถ่ายภาพหรือวิดีโอได้ทุกที่
+    </p>
+</section>
+
+<footer>
+    <div class="logo">♡ Phone Sticker Store</div>
+    <p>อุปกรณ์สร้างคอนเทนต์ที่ทำให้ทุกที่เป็นสตูดิโอของคุณ</p>
+    <small>© 2026 Phone Sticker Store. All rights reserved.</small>
+</footer>
+
+<div class="toast" id="toast">เพิ่มสินค้าลงตะกร้าแล้ว 💗</div>
+
+<script>
+    // ข้อมูลสินค้าตัวอย่าง
+    // เมื่อเชื่อม Firebase แล้ว สามารถเปลี่ยนมาโหลดข้อมูลจากฐานข้อมูลได้
+
+    const products = {
+        p1: {
+            name: "Phone Sticker Mount",
+            price: 89,
+            category: "Phone Sticker",
+            stock: 30,
+            description: "สติกเกอร์ยึดโทรศัพท์สำหรับคนชอบถ่ายภาพและวิดีโอ ช่วยให้ติดตั้งโทรศัพท์กับพื้นผิวที่รองรับได้สะดวก",
+            images: [
+                "https://placehold.co/700x700/ffe4f0/d979a7?text=Phone+Sticker",
+                "https://placehold.co/700x700/fce8f2/d979a7?text=Sticker+Detail",
+                "https://placehold.co/700x700/fff0f6/d979a7?text=How+To+Use"
+            ]
+        },
+
+        p2: {
+            name: "Mini Phone Stand",
+            price: 129,
+            category: "Phone Stand",
+            stock: 20,
+            description: "ขาตั้งโทรศัพท์ขนาดเล็ก น้ำหนักเบา เหมาะสำหรับวิดีโอคอล ถ่ายคลิป และดูคอนเทนต์",
+            images: [
+                "https://placehold.co/700x700/fce8f2/d979a7?text=Mini+Stand",
+                "https://placehold.co/700x700/ffe4f0/d979a7?text=Stand+Detail",
+                "https://placehold.co/700x700/fff0f6/d979a7?text=Stand+Use"
+            ]
+        },
+
+        p3: {
+            name: "Mini LED Light",
+            price: 159,
+            category: "Lighting",
+            stock: 15,
+            description: "ไฟ LED ขนาดพกพา เพิ่มความสว่างให้ภาพและวิดีโอ เหมาะกับการถ่ายคอนเทนต์",
+            images: [
+                "https://placehold.co/700x700/ffe4f0/d979a7?text=Mini+LED",
+                "https://placehold.co/700x700/fce8f2/d979a7?text=LED+Detail",
+                "https://placehold.co/700x700/fff0f6/d979a7?text=LED+Use"
+            ]
+        },
+
+        p4: {
+            name: "Wireless Mini Mic",
+            price: 299,
+            category: "Audio",
+            stock: 10,
+            description: "ไมโครโฟนไร้สายขนาดเล็ก ช่วยให้เสียงพูดชัดเจนขึ้น เหมาะกับการทำคลิปและสัมภาษณ์",
+            images: [
+                "https://placehold.co/700x700/fce8f2/d979a7?text=Wireless+Mic",
+                "https://placehold.co/700x700/ffe4f0/d979a7?text=Mic+Detail",
+                "https://placehold.co/700x700/fff0f6/d979a7?text=Mic+Use"
+            ]
+        }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id") || "p1";
+    const product = products[productId];
+
+    let quantity = 1;
+
+    if (!product) {
+        document.querySelector(".product-container").innerHTML =
+            "<h2>ไม่พบสินค้าที่คุณต้องการ</h2><a href='index.html'>กลับหน้าร้าน</a>";
+    } else {
+        document.title = product.name + " | Phone Sticker Store";
+
+        document.getElementById("product-name").textContent = product.name;
+        document.getElementById("product-price").textContent =
+            "฿" + product.price.toLocaleString("th-TH");
+        document.getElementById("category").textContent = product.category;
+        document.getElementById("product-description").textContent = product.description;
+        document.getElementById("full-description").textContent = product.description;
+
+        document.getElementById("stock-text").textContent =
+            product.stock > 0 ? "● มีสินค้า (" + product.stock + " ชิ้น)" : "● สินค้าหมด";
+
+        document.getElementById("main-image").src = product.images[0];
+
+        const thumbnailList = document.getElementById("thumbnail-list");
+
+        product.images.forEach((src, index) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "รูปสินค้า " + (index + 1);
+            img.className = "thumbnail" + (index === 0 ? " active" : "");
+
+            img.addEventListener("click", () => {
+                document.getElementById("main-image").src = src;
+
+                document.querySelectorAll(".thumbnail").forEach(el => {
+                    el.classList.remove("active");
+                });
+
+                img.classList.add("active");
+            });
+
+            thumbnailList.appendChild(img);
+        });
+    }
+
+    function getCart() {
+        return JSON.parse(localStorage.getItem("phoneCart") || "[]");
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem("phoneCart", JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById("cart-count").textContent = count;
+    }
+
+    function changeQuantity(amount) {
+        if (!product) return;
+
+        quantity += amount;
+
+        if (quantity < 1) quantity = 1;
+        if (quantity > Math.min(product.stock, 10)) {
+            quantity = Math.min(product.stock, 10);
+        }
+
+        document.getElementById("quantity").value = quantity;
+    }
+
+    function addToCart() {
+        if (!product || product.stock <= 0) {
+            showToast("ขออภัย สินค้าหมดแล้ว");
+            return;
+        }
+
+        const cart = getCart();
+        const existing = cart.find(item => item.id === productId);
+
+        const currentQuantity = existing ? existing.quantity : 0;
+
+        if (currentQuantity + quantity > product.stock) {
+            showToast("จำนวนสินค้าเกินสต็อก");
+            return;
+        }
+
+        if (existing) {
+            existing.quantity += quantity;
+        } else {
+            cart.push({
+                id: productId,
+                name: product.name,
+                price: product.price,
+                quantity: quantity
+            });
+        }
+
+        saveCart(cart);
+        showToast("เพิ่ม " + product.name + " ลงตะกร้าแล้ว 💗");
+    }
+
+    function buyNow() {
+        if (!product || product.stock <= 0) {
+            showToast("ขออภัย สินค้าหมดแล้ว");
+            return;
+        }
+
+        const cart = getCart();
+        const existing = cart.find(item => item.id === productId);
+
+        if (existing) {
+            existing.quantity += quantity;
+        } else {
+            cart.push({
+                id: productId,
+                name: product.name,
+                price: product.price,
+                quantity: quantity
+            });
+        }
+
+        if (existing && existing.quantity > product.stock) {
+            showToast("จำนวนสินค้าเกินสต็อก");
+            return;
+        }
+
+        saveCart(cart);
+        window.location.href = "cart.html";
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2500);
+    }
+
+    updateCartCount();
+</script>
+
+</body>
+</html>
