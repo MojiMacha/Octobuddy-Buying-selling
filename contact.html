@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ติดต่อเรา | Phone Sticker Store</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    body {
+      background: #fff9fc;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    header {
+      background: white;
+      padding: 17px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f5eaf0;
+      gap: 15px;
+    }
+
+    .logo {
+      color: #df78a6;
+      font-size: 21px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #333;
+    }
+
+    .back-link {
+      color: #888;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: #df78a6;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .hero-icon {
+      width: 75px;
+      height: 75px;
+      background: #ffeaf3;
+      color: #df78a6;
+      border-radius: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 15px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #f5eaf0;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(200, 120, 155, .05);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    .contact-icon {
+      width: 45px;
+      height: 45px;
+      min-width: 45px;
+      border-radius: 13px;
+      background: #fff0f6;
+      color: #df78a6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .contact-item h3 {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .contact-item p {
+      font-size: 13px;
+      color: #999;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-item a {
+      color: #d875a0;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #f5edf1;
+    }
+
+    .social-links a {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #fff0f6;
+      color: #d875a0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    .social-links a:hover {
+      background: #e88fb5;
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      background: white;
+      color: #333;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #e99abc;
+      box-shadow: 0 0 0 3px rgba(233,154,188,.1);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 10px;
+      background: #e88fb5;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .submit-btn:hover {
+      background: #dc78a4;
+    }
+
+    .submit-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 9px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .message.success {
+      display: block;
+      background: #effaf2;
+      color: #27834a;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      color: #c44;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff5f9;
+      border-radius: 10px;
+      color: #987187;
+      font-size: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #bbb;
+      font-size: 12px;
+    }
+
+    @media (max-width: 750px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        margin: 30px auto;
+      }
+
+      .card {
+        padding: 23px;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 450px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-heart"></i>
+      Phone <span>Sticker Store</span>
+    </a>
+
+    <a href="index.html" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i>
+      กลับหน้าหลัก
+    </a>
+  </header>
+
+  <main class="container">
+
+    <div class="hero">
+      <div class="hero-icon">
+        <i class="fa-solid fa-headset"></i>
+      </div>
+      <h1>ติดต่อเรา</h1>
+      <p>เราพร้อมช่วยเหลือและตอบคำถามของคุณ</p>
+    </div>
+
+    <div class="contact-layout">
+
+      <!-- Contact Information -->
+      <section class="card">
+
+        <h2>ช่องทางการติดต่อ</h2>
+        <p class="card-subtitle">
+          ติดต่อทีมงาน Phone Sticker Store
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+          <div>
+            <h3>อีเมล</h3>
+            <p>กรุณาระบุอีเมลของร้านค้า</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+          <div>
+            <h3>โทรศัพท์</h3>
+            <p>กรุณาระบุเบอร์โทรศัพท์ของร้านค้า</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+          <div>
+            <h3>เวลาทำการ</h3>
+            <p>กรุณาระบุวันและเวลาทำการจริง</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div>
+            <h3>ที่อยู่</h3>
+            <p>กรุณาระบุที่อยู่ร้านค้า (ถ้ามี)</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <!-- เปลี่ยน # เป็น URL จริงของร้าน -->
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+
+          <a href="#" aria-label="LINE">
+            <i class="fa-brands fa-line"></i>
+          </a>
+        </div>
+
+      </section>
+
+      <!-- Contact Form -->
+      <section class="card">
+
+        <h2>ส่งข้อความถึงเรา</h2>
+        <p class="card-subtitle">
+          กรอกข้อมูลด้านล่างเพื่อแจ้งเรื่องที่ต้องการสอบถาม
+        </p>
+
+        <div id="message" class="message"></div>
+
+        <form id="contactForm">
+
+          <div class="form-group">
+            <label for="name">ชื่อผู้ติดต่อ *</label>
+            <input
+              type="text"
+              id="name"
+              maxlength="100"
+              placeholder="ชื่อของคุณ"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">อีเมล *</label>
+            <input
+              type="email"
+              id="email"
+              maxlength="254"
+              placeholder="example@email.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="topic">หัวข้อที่ต้องการติดต่อ *</label>
+            <select id="topic" required>
+              <option value="">เลือกหัวข้อ</option>
+              <option value="สอบถามสินค้า">สอบถามสินค้า</option>
+              <option value="สถานะคำสั่งซื้อ">สถานะคำสั่งซื้อ</option>
+              <option value="การชำระเงิน">การชำระเงิน</option>
+              <option value="การจัดส่ง">การจัดส่ง</option>
+              <option value="แจ้งปัญหาสินค้า">แจ้งปัญหาสินค้า</option>
+              <option value="อื่น ๆ">อื่น ๆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="orderId">หมายเลขคำสั่งซื้อ (ถ้ามี)</label>
+            <input
+              type="text"
+              id="orderId"
+              maxlength="50"
+              placeholder="เช่น PSS-123456"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="details">รายละเอียด *</label>
+            <textarea
+              id="details"
+              maxlength="3000"
+              placeholder="พิมพ์ข้อความที่ต้องการติดต่อ..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fa-regular fa-paper-plane"></i>
+            ส่งข้อความ
+          </button>
+
+        </form>
+
+        <div class="notice">
+          <i class="fa-solid fa-circle-info"></i>
+          กรุณาอย่าส่งรหัสผ่าน ข้อมูลบัตรธนาคาร
+          หรือข้อมูลลับผ่านแบบฟอร์มนี้
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Phone Sticker Store. All rights reserved.
+  </footer>
+
+  <script type="module">
+
+    import { initializeApp, getApps } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      serverTimestamp
+    } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = getApps().length
+      ? getApps()[0]
+      : initializeApp(firebaseConfig);
+
+    const db = getFirestore(app);
+
+    const form = document.getElementById("contactForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const message = document.getElementById("message");
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "message " + type;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const topic = document.getElementById("topic").value;
+      const orderId = document.getElementById("orderId").value.trim();
+      const details = document.getElementById("details").value.trim();
+
+      if (!name || !email || !topic || !details) {
+        showMessage("กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน", "error");
+        return;
+      }
+
+      if (name.length < 2 || details.length < 5) {
+        showMessage("กรุณาตรวจสอบชื่อและรายละเอียดอีกครั้ง", "error");
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showMessage("กรุณากรอกอีเมลให้ถูกต้อง", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
+
+      try {
+
+        await addDoc(collection(db, "contactMessages"), {
+          name,
+          email,
+          topic,
+          orderId,
+          details,
+          status: "new",
+          createdAt: serverTimestamp()
+        });
+
+        showMessage(
+          "ส่งข้อความเรียบร้อยแล้ว ขอบคุณที่ติดต่อเรา",
+          "success"
+        );
+
+        form.reset();
+
+      } catch (error) {
+
+        console.error("Contact form error:", error);
+
+        showMessage(
+          "ไม่สามารถส่งข้อความได้ กรุณาลองใหม่อีกครั้ง",
+          "error"
+        );
+
+      } finally {
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML =
+          '<i class="fa-regular fa-paper-plane"></i> ส่งข้อความ';
+
+      }
+    });
+
+  </script>
+
+</body>
+</html>
