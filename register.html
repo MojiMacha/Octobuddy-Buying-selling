@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สมัครสมาชิก | Phone Sticker Store</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Kanit', sans-serif;
+            background: #fffafd;
+            color: #302630;
+            min-height: 100vh;
+        }
+
+        header {
+            background: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f5e8ef;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+            color: #e78bb5;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #806e78;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .main-container {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 45px 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border: 1px solid #f2e5ec;
+            border-radius: 25px;
+            padding: 38px;
+            box-shadow: 0 15px 45px rgba(210, 130, 170, 0.08);
+        }
+
+        .register-heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .register-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 20px;
+            background: #fff0f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 15px;
+        }
+
+        .register-heading h1 {
+            font-size: 27px;
+            margin: 0 0 7px;
+        }
+
+        .register-heading p {
+            font-size: 13px;
+            color: #a18d98;
+            margin: 0;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            color: #685762;
+            margin-bottom: 8px;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #eedee7;
+            border-radius: 12px;
+            background: #fffafd;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: .2s;
+        }
+
+        .field input:focus {
+            border-color: #e78bb5;
+            box-shadow: 0 0 0 3px #fce5f0;
+        }
+
+        .password-input {
+            padding-right: 75px !important;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: #d979a7;
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .password-hint {
+            font-size: 11px;
+            color: #a18d98;
+            margin-top: 7px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 12px;
+            color: #806e78;
+            margin: 20px 0;
+            line-height: 1.7;
+        }
+
+        .terms input {
+            accent-color: #e78bb5;
+            margin-top: 5px;
+        }
+
+        .terms a {
+            color: #d979a7;
+            text-decoration: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: #e987b5;
+            color: white;
+            padding: 14px;
+            font-family: inherit;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .submit-btn:hover {
+            background: #d975a5;
+        }
+
+        .submit-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #c0aeba;
+            font-size: 12px;
+            margin: 23px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #f1e5ec;
+        }
+
+        .login-text {
+            text-align: center;
+            font-size: 13px;
+            color: #8a7882;
+        }
+
+        .login-text a {
+            color: #d979a7;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .message {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .message.error {
+            display: block;
+            color: #c04e4e;
+            background: #fff0f0;
+        }
+
+        .message.success {
+            display: block;
+            color: #37875f;
+            background: #effaf4;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #b09da8;
+            font-size: 11px;
+            margin-top: 25px;
+        }
+
+        @media(max-width: 520px) {
+            header {
+                padding: 14px 5%;
+            }
+
+            .register-card {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .register-heading h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">♡ Phone Sticker</a>
+    <a href="index.html" class="back-link">← กลับหน้าร้าน</a>
+</header>
+
+<main class="main-container">
+
+    <section class="register-card">
+
+        <div class="register-heading">
+            <div class="register-icon">💗</div>
+            <h1>สร้างบัญชีใหม่</h1>
+            <p>สมัครสมาชิกเพื่อเริ่มต้นช้อปปิ้งกับเรา</p>
+        </div>
+
+        <div id="message" class="message" role="alert"></div>
+
+        <form id="register-form">
+
+            <div class="field">
+                <label for="fullname">ชื่อ - นามสกุล</label>
+                <input
+                    type="text"
+                    id="fullname"
+                    placeholder="กรอกชื่อของคุณ"
+                    maxlength="100"
+                    autocomplete="name"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="email">อีเมล</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@email.com"
+                    autocomplete="email"
+                    maxlength="254"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="phone">เบอร์โทรศัพท์ (ไม่บังคับ)</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="08XXXXXXXX"
+                    inputmode="numeric"
+                    pattern="[0-9]{9,10}"
+                    maxlength="10"
+                    autocomplete="tel"
+                >
+            </div>
+
+            <div class="field">
+                <label for="password">รหัสผ่าน</label>
+
+                <div class="input-wrap">
+                    <input
+                        type="password"
+                        id="password"
+                        class="password-input"
+                        placeholder="อย่างน้อย 8 ตัวอักษร"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword('password', this)"
+                    >แสดง</button>
+                </div>
+
+                <div class="password-hint">
+                    ควรมีตัวอักษรและตัวเลขผสมกัน และไม่ใช้รหัสผ่านที่เดาง่าย
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="confirm-password">ยืนยันรหัสผ่าน</label>
+
+                <div class="input-wrap">
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        class="password-input"
+                        placeholder="กรอกรหัสผ่านอีกครั้ง"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword('confirm-password', this)"
+                    >แสดง</button>
+                </div>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox" id="accept-terms" required>
+                <span>
+                    ฉันยอมรับ
+                    <a href="terms.html" target="_blank">เงื่อนไขการใช้บริการ</a>
+                    และ
+                    <a href="privacy.html" target="_blank">นโยบายความเป็นส่วนตัว</a>
+                </span>
+            </label>
+
+            <button type="submit" class="submit-btn" id="submit-btn">
+                สมัครสมาชิก →
+            </button>
+
+        </form>
+
+        <div class="divider">หรือ</div>
+
+        <div class="login-text">
+            มีบัญชีอยู่แล้ว?
+            <a href="login.html">เข้าสู่ระบบ</a>
+        </div>
+
+        <div class="footer-text">
+            © 2026 Phone Sticker Store
+        </div>
+
+    </section>
+
+</main>
+
+<script type="module">
+    import {
+        initializeApp,
+        getApps
+    } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        updateProfile
+    } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    import {
+        getFirestore,
+        doc,
+        setDoc,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    // ==========================================
+    // FIREBASE CONFIG
+    // ใช้ค่าเดียวกับ firebase.js ของโปรเจกต์
+    // ==========================================
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = getApps().length
+        ? getApps()[0]
+        : initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("register-form");
+    const message = document.getElementById("message");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
+
+    function getFirebaseError(error) {
+        switch (error.code) {
+            case "auth/email-already-in-use":
+                return "อีเมลนี้มีบัญชีอยู่แล้ว กรุณาเข้าสู่ระบบ";
+
+            case "auth/invalid-email":
+                return "รูปแบบอีเมลไม่ถูกต้อง";
+
+            case "auth/weak-password":
+                return "รหัสผ่านไม่ปลอดภัย กรุณาตั้งรหัสผ่านใหม่";
+
+            case "auth/network-request-failed":
+                return "เชื่อมต่ออินเทอร์เน็ตไม่ได้ กรุณาลองอีกครั้ง";
+
+            case "auth/operation-not-allowed":
+                return "กรุณาเปิด Email/Password ใน Firebase Authentication";
+
+            case "permission-denied":
+                return "ไม่มีสิทธิ์บันทึกข้อมูล โปรดตรวจสอบ Firestore Rules";
+
+            default:
+                return "สมัครสมาชิกไม่สำเร็จ กรุณาลองอีกครั้ง";
+        }
+    }
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const fullname = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+        if (!fullname || !email) {
+            showMessage("กรุณากรอกข้อมูลให้ครบถ้วน", "error");
+            return;
+        }
+
+        if (fullname.length < 2) {
+            showMessage("กรุณากรอกชื่ออย่างน้อย 2 ตัวอักษร", "error");
+            return;
+        }
+
+        if (password.length < 8) {
+            showMessage("รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร", "error");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage("รหัสผ่านทั้งสองช่องไม่ตรงกัน", "error");
+            return;
+        }
+
+        if (!document.getElementById("accept-terms").checked) {
+            showMessage("กรุณายอมรับเงื่อนไขการใช้บริการก่อน", "error");
+            return;
+        }
+
+        if (phone && !/^[0-9]{9,10}$/.test(phone)) {
+            showMessage("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง", "error");
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "กำลังสมัครสมาชิก...";
+
+        try {
+            // 1. สร้างบัญชี Firebase Authentication
+            const userCredential =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            const user = userCredential.user;
+
+            // 2. บันทึกชื่อโปรไฟล์ใน Firebase Auth
+            await updateProfile(user, {
+                displayName: fullname
+            });
+
+            // 3. บันทึกข้อมูลลูกค้าใน Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                uid: user.uid,
+                name: fullname,
+                email: email,
+                phone: phone,
+                role: "customer",
+                createdAt: serverTimestamp()
+            });
+
+            showMessage(
+                "สมัครสมาชิกสำเร็จ! กำลังพาไปหน้าร้าน...",
+                "success"
+            );
+
+            form.reset();
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+
+        } catch (error) {
+            console.error("Registration error:", error);
+
+            showMessage(getFirebaseError(error), "error");
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "สมัครสมาชิก →";
+        }
+    });
+</script>
+
+<script>
+    function togglePassword(id, button) {
+        const input = document.getElementById(id);
+
+        if (input.type === "password") {
+            input.type = "text";
+            button.textContent = "ซ่อน";
+        } else {
+            input.type = "password";
+            button.textContent = "แสดง";
+        }
+    }
+</script>
+
+</body>
+</html>
