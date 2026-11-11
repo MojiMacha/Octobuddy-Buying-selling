@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บัญชีของฉัน | Phone Sticker Store</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    body {
+      background: #fff9fc;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #f5eaf0;
+      padding: 17px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      color: #df78a6;
+      font-size: 21px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #333;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: #df78a6;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .page-heading {
+      margin-bottom: 25px;
+    }
+
+    .page-heading h1 {
+      font-size: 29px;
+      font-weight: 600;
+    }
+
+    .page-heading p {
+      color: #999;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #f5eaf0;
+      border-radius: 18px;
+      padding: 27px;
+      box-shadow: 0 8px 25px rgba(200, 120, 155, .05);
+    }
+
+    .user-card {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f5b7d1, #f9d9e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0 auto 15px;
+    }
+
+    .user-name {
+      font-size: 19px;
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    .user-email {
+      color: #aaa;
+      font-size: 12px;
+      word-break: break-all;
+      margin-top: 4px;
+    }
+
+    .member-label {
+      display: inline-block;
+      margin-top: 14px;
+      background: #fff0f6;
+      color: #d875a0;
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-size: 12px;
+    }
+
+    .side-menu {
+      margin-top: 25px;
+      border-top: 1px solid #f5edf1;
+      padding-top: 15px;
+      text-align: left;
+    }
+
+    .side-menu a,
+    .side-menu button {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 10px;
+      border: none;
+      background: none;
+      text-decoration: none;
+      color: #666;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 9px;
+      transition: .2s;
+    }
+
+    .side-menu a:hover,
+    .side-menu button:hover {
+      background: #fff3f8;
+      color: #dc78a4;
+    }
+
+    .side-menu i {
+      width: 18px;
+      text-align: center;
+    }
+
+    .logout-item {
+      color: #dc7777 !important;
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      height: 47px;
+      padding: 0 14px;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      background: white;
+      color: #333;
+    }
+
+    .form-group input:focus {
+      border-color: #e99abc;
+      box-shadow: 0 0 0 3px rgba(233,154,188,.1);
+    }
+
+    .form-group input:disabled {
+      background: #fafafa;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+    .form-hint {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    .save-btn {
+      border: none;
+      background: #e88fb5;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .save-btn:hover {
+      background: #dc78a4;
+    }
+
+    .save-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 9px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .message.success {
+      display: block;
+      background: #effaf2;
+      color: #27834a;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      color: #c44;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 70px 20px;
+      color: #d875a0;
+    }
+
+    .loading i {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #bbb;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .container {
+        margin: 30px auto;
+      }
+
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .page-heading h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-heart"></i>
+      Phone <span>Sticker Store</span>
+    </a>
+
+    <a href="index.html" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i>
+      กลับหน้าร้าน
+    </a>
+  </header>
+
+  <main class="container">
+
+    <div class="page-heading">
+      <h1>บัญชีของฉัน</h1>
+      <p>จัดการข้อมูลส่วนตัวและบัญชีสมาชิกของคุณ</p>
+    </div>
+
+    <div id="loading" class="loading">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      <p>กำลังโหลดข้อมูลบัญชี...</p>
+    </div>
+
+    <div id="profileContent" class="profile-layout" style="display:none;">
+
+      <aside class="card user-card">
+
+        <div class="avatar" id="avatar">U</div>
+
+        <div class="user-name" id="sidebarName">สมาชิก</div>
+        <div class="user-email" id="sidebarEmail">-</div>
+
+        <div class="member-label">
+          <i class="fa-solid fa-crown"></i>
+          Customer Member
+        </div>
+
+        <nav class="side-menu">
+          <a href="profile.html">
+            <i class="fa-regular fa-user"></i>
+            ข้อมูลส่วนตัว
+          </a>
+
+          <a href="orders.html">
+            <i class="fa-solid fa-box"></i>
+            ประวัติคำสั่งซื้อ
+          </a>
+
+          <a href="index.html">
+            <i class="fa-solid fa-store"></i>
+            เลือกซื้อสินค้า
+          </a>
+
+          <button type="button" class="logout-item" id="logoutBtn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            ออกจากระบบ
+          </button>
+        </nav>
+
+      </aside>
+
+      <section class="card">
+
+        <h2 class="section-title">ข้อมูลส่วนตัว</h2>
+        <p class="section-subtitle">
+          แก้ไขข้อมูลที่ใช้สำหรับการติดต่อและจัดส่งสินค้า
+        </p>
+
+        <div id="message" class="message"></div>
+
+        <form id="profileForm">
+
+          <div class="form-group">
+            <label for="fullname">ชื่อ - นามสกุล</label>
+            <input
+              type="text"
+              id="fullname"
+              placeholder="กรอกชื่อและนามสกุล"
+              maxlength="100"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">อีเมล</label>
+            <input
+              type="email"
+              id="email"
+              disabled
+            >
+            <p class="form-hint">
+              อีเมลที่ใช้เข้าสู่ระบบ ไม่สามารถแก้ไขได้จากหน้านี้
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">เบอร์โทรศัพท์</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="เช่น 0812345678"
+              maxlength="10"
+              inputmode="numeric"
+            >
+          </div>
+
+          <button type="submit" class="save-btn" id="saveBtn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            บันทึกข้อมูล
+          </button>
+
+        </form>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Phone Sticker Store. All rights reserved.
+  </footer>
+
+  <script type="module">
+
+    import { initializeApp, getApps } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+      updateProfile
+    } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      updateDoc
+    } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    // ใช้ Firebase Config ชุดเดียวกับ register.html และ login.html
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = getApps().length
+      ? getApps()[0]
+      : initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const loading = document.getElementById("loading");
+    const profileContent = document.getElementById("profileContent");
+    const profileForm = document.getElementById("profileForm");
+    const message = document.getElementById("message");
+    const saveBtn = document.getElementById("saveBtn");
+
+    let currentUser = null;
+
+    function showMessage(text, type = "error") {
+      message.textContent = text;
+      message.className = "message " + type;
+    }
+
+    function hideLoading() {
+      loading.style.display = "none";
+      profileContent.style.display = "grid";
+    }
+
+    function setUserName(name) {
+      const safeName = name || "สมาชิก";
+
+      document.getElementById("sidebarName").textContent = safeName;
+      document.getElementById("avatar").textContent =
+        safeName.trim().charAt(0).toUpperCase() || "U";
+    }
+
+    // ตรวจสอบสถานะการเข้าสู่ระบบ
+    onAuthStateChanged(auth, async (user) => {
+
+      if (!user) {
+        window.location.replace("login.html");
+        return;
+      }
+
+      currentUser = user;
+
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnapshot = await getDoc(userRef);
+
+        let userData = {};
+
+        if (userSnapshot.exists()) {
+          userData = userSnapshot.data();
+        }
+
+        const fullname =
+          userData.fullname ||
+          user.displayName ||
+          "";
+
+        const phone = userData.phone || "";
+
+        document.getElementById("fullname").value = fullname;
+        document.getElementById("email").value = user.email || "";
+        document.getElementById("phone").value = phone;
+
+        document.getElementById("sidebarEmail").textContent =
+          user.email || "-";
+
+        setUserName(fullname);
+
+        hideLoading();
+
+      } catch (error) {
+        console.error("Profile loading error:", error);
+
+        loading.innerHTML = `
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่อีกครั้ง</p>
+        `;
+      }
+    });
+
+    // บันทึกข้อมูลส่วนตัว
+    profileForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!currentUser) return;
+
+      const fullname =
+        document.getElementById("fullname").value.trim();
+
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      if (fullname.length < 2) {
+        showMessage("กรุณากรอกชื่ออย่างน้อย 2 ตัวอักษร");
+        return;
+      }
+
+      if (phone && !/^0[0-9]{9}$/.test(phone)) {
+        showMessage("กรุณากรอกเบอร์โทรศัพท์ 10 หลักให้ถูกต้อง");
+        return;
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+
+      message.className = "message";
+
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+
+        // แก้ไขเฉพาะข้อมูลที่ผู้ใช้มีสิทธิ์แก้ไข
+        await updateDoc(userRef, {
+          fullname: fullname,
+          phone: phone
+        });
+
+        await updateProfile(currentUser, {
+          displayName: fullname
+        });
+
+        setUserName(fullname);
+
+        showMessage("บันทึกข้อมูลเรียบร้อยแล้ว", "success");
+
+      } catch (error) {
+        console.error("Profile update error:", error);
+
+        if (error.code === "not-found") {
+          showMessage(
+            "ไม่พบข้อมูลสมาชิกใน Firestore กรุณาตรวจสอบขั้นตอนสมัครสมาชิก"
+          );
+        } else if (error.code === "permission-denied") {
+          showMessage(
+            "ไม่มีสิทธิ์แก้ไขข้อมูล กรุณาตรวจสอบ Firestore Rules"
+          );
+        } else {
+          showMessage("บันทึกข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง");
+        }
+
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML =
+          '<i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูล';
+      }
+    });
+
+    // ออกจากระบบ
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+
+      const confirmed = confirm("คุณต้องการออกจากระบบใช่หรือไม่?");
+
+      if (!confirmed) return;
+
+      try {
+        await signOut(auth);
+        window.location.href = "index.html";
+      } catch (error) {
+        console.error("Logout error:", error);
+        showMessage("ไม่สามารถออกจากระบบได้ กรุณาลองอีกครั้ง");
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
