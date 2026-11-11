@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Phone Sticker Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+    background: #fffafd;
+    color: #302630;
+}
+
+header {
+    background: white;
+    padding: 16px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f5e8ef;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 700;
+    color: #e78bb5;
+    text-decoration: none;
+}
+
+header a.back {
+    color: #806e78;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.container {
+    width: 86%;
+    max-width: 1200px;
+    margin: 40px auto 70px;
+}
+
+.page-heading h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.page-heading p {
+    color: #9b8591;
+    font-size: 14px;
+}
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 370px;
+    gap: 25px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #f2e5ec;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.panel h2 {
+    font-size: 19px;
+    margin: 0 0 22px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field.full { grid-column: 1 / -1; }
+
+.field label {
+    font-size: 13px;
+    color: #685762;
+}
+
+.field input, .field textarea, .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #eedee7;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    background: #fffafd;
+}
+
+.field input:focus, .field textarea:focus, .field select:focus {
+    border-color: #e78bb5;
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 85px;
+}
+
+.payment-option {
+    border: 1px solid #f0dce7;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.payment-option:has(input:checked) {
+    border-color: #e78bb5;
+    background: #fff5fa;
+}
+
+.payment-option input {
+    accent-color: #e78bb5;
+    width: 18px;
+    height: 18px;
+}
+
+.payment-icon { font-size: 25px; }
+
+.payment-option strong {
+    display: block;
+    font-size: 14px;
+}
+
+.payment-option small {
+    color: #9b8591;
+    font-size: 12px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    margin: 14px 0;
+    color: #766671;
+}
+
+.order-item strong { color: #40343c; }
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    font-size: 14px;
+    color: #8a7882;
+}
+
+.summary-line.total {
+    border-top: 1px solid #f1e5ec;
+    padding-top: 18px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #302630;
+}
+
+.place-order {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background: #e987b5;
+    color: white;
+    padding: 15px;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.place-order:hover { background: #d975a5; }
+
+.place-order:disabled {
+    background: #d9cbd3;
+    cursor: not-allowed;
+}
+
+.note {
+    font-size: 12px;
+    color: #a18d98;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+.qr-area {
+    display: none;
+    text-align: center;
+    background: #fff6fa;
+    border: 1px solid #f2d9e5;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.qr-area img {
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.qr-area p {
+    font-size: 13px;
+    color: #8a7882;
+}
+
+.success {
+    display: none;
+    background: #effaf4;
+    color: #37875f;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.success h3 { margin: 0 0 8px; }
+
+.success a {
+    display: inline-block;
+    background: #37875f;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+footer {
+    background: white;
+    border-top: 1px solid #f5e8ef;
+    text-align: center;
+    padding: 30px;
+    color: #907b88;
+}
+
+@media(max-width: 850px) {
+    .checkout-layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 520px) {
+    header { padding: 14px 5%; }
+    .container { width: 92%; margin-top: 25px; }
+    .panel { padding: 18px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .field.full { grid-column: auto; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">♡ Phone Sticker</a>
+    <a href="cart.html" class="back">← กลับไปตะกร้า</a>
+</header>
+
+<main class="container">
+
+    <div class="page-heading">
+        <h1>ชำระเงิน 💗</h1>
+        <p>กรอกข้อมูลจัดส่งและเลือกวิธีชำระเงิน</p>
+    </div>
+
+    <div class="checkout-layout">
+
+        <div>
+
+            <section class="panel">
+                <h2>📦 ข้อมูลผู้รับสินค้า</h2>
+
+                <form id="checkout-form">
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="fullname">ชื่อ - นามสกุล *</label>
+                            <input id="fullname" name="fullname" required
+                                   placeholder="ชื่อผู้รับสินค้า">
+                        </div>
+
+                        <div class="field">
+                            <label for="phone">เบอร์โทรศัพท์ *</label>
+                            <input id="phone" name="phone" type="tel"
+                                   pattern="[0-9]{9,10}" maxlength="10"
+                                   required placeholder="08XXXXXXXX">
+                        </div>
+
+                        <div class="field full">
+                            <label for="address">บ้านเลขที่ / ถนน / หมู่บ้าน *</label>
+                            <textarea id="address" name="address" required
+                                      placeholder="กรอกที่อยู่โดยละเอียด"></textarea>
+                        </div>
+
+                        <div class="field">
+                            <label for="province">จังหวัด *</label>
+                            <input id="province" name="province" required
+                                   placeholder="จังหวัด">
+                        </div>
+
+                        <div class="field">
+                            <label for="district">อำเภอ / เขต *</label>
+                            <input id="district" name="district" required
+                                   placeholder="อำเภอ">
+                        </div>
+
+                        <div class="field">
+                            <label for="subdistrict">ตำบล / แขวง *</label>
+                            <input id="subdistrict" name="subdistrict" required
+                                   placeholder="ตำบล">
+                        </div>
+
+                        <div class="field">
+                            <label for="postcode">รหัสไปรษณีย์ *</label>
+                            <input id="postcode" name="postcode" required
+                                   inputmode="numeric" pattern="[0-9]{5}"
+                                   maxlength="5" placeholder="40000">
+                        </div>
+
+                        <div class="field full">
+                            <label for="note">หมายเหตุถึงร้านค้า (ถ้ามี)</label>
+                            <textarea id="note" name="note"
+                                      placeholder="เช่น ฝากไว้หน้าบ้าน"></textarea>
+                        </div>
+
+                    </div>
+                </form>
+            </section>
+
+            <section class="panel">
+                <h2>💳 วิธีชำระเงิน</h2>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="promptpay" checked>
+                    <span class="payment-icon">📱</span>
+                    <span>
+                        <strong>QR PromptPay</strong>
+                        <small>สแกน QR Code ผ่านแอปธนาคาร</small>
+                    </span>
+                </label>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="stripe">
+                    <span class="payment-icon">💳</span>
+                    <span>
+                        <strong>บัตรเครดิต / เดบิต</strong>
+                        <small>ชำระผ่าน Stripe Checkout</small>
+                    </span>
+                </label>
+
+                <p class="note">
+                    ระบบนี้เป็นหน้า Checkout ตัวอย่าง
+                    การชำระเงินจริงต้องเชื่อม Firebase Cloud Functions
+                    และระบบผู้ให้บริการชำระเงินก่อนใช้งาน
+                </p>
+            </section>
+
+        </div>
+
+        <aside>
+
+            <section class="panel">
+                <h2>🛍️ สรุปคำสั่งซื้อ</h2>
+
+                <div id="order-items"></div>
+
+                <div class="summary-line">
+                    <span>ราคาสินค้า</span>
+                    <span id="subtotal">฿0</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>ค่าจัดส่ง</span>
+                    <span id="shipping">฿0</span>
+                </div>
+
+                <div class="summary-line total">
+                    <span>ยอดรวมสุทธิ</span>
+                    <span id="grand-total">฿0</span>
+                </div>
+
+                <button class="place-order" id="submit-btn" onclick="placeOrder()">
+                    ยืนยันคำสั่งซื้อ →
+                </button>
+
+                <p class="note">
+                    เมื่อกดยืนยัน ระบบจะสร้างคำสั่งซื้อทดลอง
+                    ยังไม่มีการเรียกเก็บเงินจริง
+                </p>
+
+                <div class="qr-area" id="qr-area">
+                    <h3>QR PromptPay</h3>
+                    <p>นี่เป็น QR ตัวอย่าง ไม่สามารถใช้ชำระเงินจริงได้</p>
+                    <img src="https://placehold.co/300x300/ffffff/333333?text=DEMO+QR"
+                         alt="QR ตัวอย่าง">
+                    <p>กรุณาใช้ QR ที่สร้างจากระบบชำระเงินจริงเมื่อเชื่อม Backend แล้ว</p>
+                </div>
+
+                <div class="success" id="success">
+                    <h3>สร้างคำสั่งซื้อแล้ว! 💗</h3>
+                    <p>หมายเลขคำสั่งซื้อ: <strong id="order-id"></strong></p>
+                    <p>สถานะ: รอการชำระเงิน</p>
+                    <a href="orders.html">ดูคำสั่งซื้อของฉัน</a>
+                </div>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<footer>
+    <div class="logo">♡ Phone Sticker Store</div>
+    <p>อุปกรณ์สร้างคอนเทนต์ที่ทำให้ทุกที่เป็นสตูดิโอของคุณ</p>
+    <small>© 2026 Phone Sticker Store. All rights reserved.</small>
+</footer>
+
+<script>
+const CART_KEY = "phoneCart";
+const ORDER_KEY = "phoneOrders";
+
+function getCart() {
+    try {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(cart) ? cart : [];
+    } catch {
+        return [];
+    }
+}
+
+function money(amount) {
+    return "฿" + amount.toLocaleString("th-TH");
+}
+
+function getTotals() {
+    const cart = getCart();
+
+    const subtotal = cart.reduce((sum, item) => {
+        return sum + (Number(item.price) * Number(item.quantity));
+    }, 0);
+
+    const shipping = subtotal === 0 || subtotal >= 500 ? 0 : 40;
+
+    return {
+        subtotal,
+        shipping,
+        total: subtotal + shipping
+    };
+}
+
+function renderOrder() {
+    const cart = getCart();
+    const container = document.getElementById("order-items");
+
+    if (cart.length === 0) {
+        alert("ตะกร้าสินค้าว่าง กรุณาเลือกสินค้าก่อน");
+        window.location.href = "index.html";
+        return;
+    }
+
+    container.innerHTML = "";
+
+    cart.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "order-item";
+
+        const name = document.createElement("span");
+        name.textContent = item.name + " × " + item.quantity;
+
+        const price = document.createElement("strong");
+        price.textContent = money(item.price * item.quantity);
+
+        row.append(name, price);
+        container.appendChild(row);
+    });
+
+    const totals = getTotals();
+
+    document.getElementById("subtotal").textContent =
+        money(totals.subtotal);
+
+    document.getElementById("shipping").textContent =
+        totals.shipping === 0 ? "ฟรี" : money(totals.shipping);
+
+    document.getElementById("grand-total").textContent =
+        money(totals.total);
+}
+
+function getOrders() {
+    try {
+        const orders = JSON.parse(localStorage.getItem(ORDER_KEY) || "[]");
+        return Array.isArray(orders) ? orders : [];
+    } catch {
+        return [];
+    }
+}
+
+function placeOrder() {
+    const form = document.getElementById("checkout-form");
+
+    if (!form.reportValidity()) return;
+
+    const cart = getCart();
+
+    if (cart.length === 0) {
+        alert("ตะกร้าสินค้าว่าง");
+        return;
+    }
+
+    const payment = document.querySelector(
+        'input[name="payment"]:checked'
+    ).value;
+
+    const totals = getTotals();
+
+    const order = {
+        id: "PSS-" + Date.now(),
+        date: new Date().toISOString(),
+        customer: {
+            fullname: document.getElementById("fullname").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            address: document.getElementById("address").value.trim(),
+            province: document.getElementById("province").value.trim(),
+            district: document.getElementById("district").value.trim(),
+            subdistrict: document.getElementById("subdistrict").value.trim(),
+            postcode: document.getElementById("postcode").value.trim(),
+            note: document.getElementById("note").value.trim()
+        },
+        items: cart,
+        subtotal: totals.subtotal,
+        shipping: totals.shipping,
+        total: totals.total,
+        paymentMethod: payment,
+        paymentStatus: "pending",
+        orderStatus: "pending"
+    };
+
+    const orders = getOrders();
+    orders.unshift(order);
+
+    localStorage.setItem(ORDER_KEY, JSON.stringify(orders));
+
+    // แสดงหน้าสำเร็จสำหรับโหมดทดลอง
+    document.getElementById("order-id").textContent = order.id;
+    document.getElementById("success").style.display = "block";
+
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("submit-btn").textContent = "สร้างคำสั่งซื้อแล้ว";
+
+    if (payment === "promptpay") {
+        document.getElementById("qr-area").style.display = "block";
+    } else {
+        alert(
+            "สร้างคำสั่งซื้อทดลองแล้ว\n" +
+            "การชำระเงิน Stripe ยังไม่ได้เชื่อมต่อ"
+        );
+    }
+
+    // ล้างตะกร้าเมื่อสร้างคำสั่งซื้อ
+    localStorage.removeItem(CART_KEY);
+
+    document.getElementById("order-items").innerHTML =
+        "<p>สร้างคำสั่งซื้อเรียบร้อยแล้ว</p>";
+}
+
+renderOrder();
+</script>
+
+</body>
+</html>
