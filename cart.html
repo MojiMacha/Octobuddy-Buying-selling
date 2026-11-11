@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตะกร้าสินค้า | Phone Sticker Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+    background: #fffafd;
+    color: #302630;
+}
+
+header {
+    background: white;
+    padding: 16px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f5e8ef;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 700;
+    color: #e78bb5;
+    text-decoration: none;
+}
+
+nav { display: flex; gap: 22px; align-items: center; }
+
+nav a {
+    text-decoration: none;
+    color: #51434d;
+    font-size: 14px;
+}
+
+.login {
+    background: #f5a8ca;
+    color: white;
+    padding: 9px 20px;
+    border-radius: 30px;
+}
+
+.container {
+    width: 86%;
+    max-width: 1200px;
+    margin: 45px auto 70px;
+}
+
+.page-title {
+    margin-bottom: 30px;
+}
+
+.page-title h1 {
+    font-size: 30px;
+    margin: 0;
+}
+
+.page-title p {
+    color: #9b8591;
+    font-size: 14px;
+}
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 25px;
+    align-items: start;
+}
+
+.cart-box, .summary {
+    background: white;
+    border: 1px solid #f2e5ec;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f3e8ee;
+}
+
+.cart-header h2 { font-size: 18px; margin: 0; }
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 105px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #f4eaf0;
+}
+
+.cart-item img {
+    width: 105px;
+    height: 105px;
+    border-radius: 15px;
+    object-fit: cover;
+    background: #ffeaf3;
+}
+
+.item-info h3 {
+    font-size: 16px;
+    margin: 0 0 5px;
+}
+
+.item-info p {
+    color: #e77eae;
+    font-weight: 600;
+    margin: 0;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.quantity button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #efdce6;
+    background: #fffafd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.quantity span {
+    min-width: 20px;
+    text-align: center;
+}
+
+.item-actions {
+    text-align: right;
+}
+
+.item-total {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.remove {
+    border: none;
+    background: none;
+    color: #dc789c;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.empty {
+    text-align: center;
+    padding: 65px 15px;
+}
+
+.empty-icon { font-size: 65px; }
+
+.empty h2 { margin-bottom: 5px; }
+
+.empty p { color: #a18d98; }
+
+.continue {
+    display: inline-block;
+    text-decoration: none;
+    background: #fce5f0;
+    color: #c45e91;
+    padding: 11px 22px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.summary h2 {
+    font-size: 19px;
+    margin: 0 0 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    color: #8a7882;
+    font-size: 14px;
+}
+
+.summary-row.total {
+    border-top: 1px solid #f1e5ec;
+    padding-top: 18px;
+    color: #302630;
+    font-weight: 700;
+    font-size: 19px;
+}
+
+.checkout {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background: #e987b5;
+    color: white;
+    padding: 14px;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.checkout:hover { background: #d975a5; }
+
+.checkout:disabled {
+    background: #e7dce2;
+    cursor: not-allowed;
+}
+
+.secure {
+    text-align: center;
+    font-size: 12px;
+    color: #a18d98;
+    margin-top: 15px;
+}
+
+footer {
+    background: white;
+    border-top: 1px solid #f5e8ef;
+    text-align: center;
+    padding: 30px;
+    color: #907b88;
+}
+
+@media(max-width: 850px) {
+    .cart-layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 520px) {
+    header { padding: 13px 5%; }
+    nav { gap: 10px; }
+    nav a:not(.login) { display: none; }
+    .container { width: 92%; margin-top: 30px; }
+    .cart-box, .summary { padding: 17px; }
+    .cart-item {
+        grid-template-columns: 75px 1fr;
+        gap: 12px;
+    }
+    .cart-item img { width: 75px; height: 75px; }
+    .item-actions {
+        grid-column: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .item-total { margin: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">♡ Phone Sticker</a>
+    <nav>
+        <a href="index.html">หน้าร้าน</a>
+        <a href="index.html#categories">หมวดหมู่</a>
+        <a href="cart.html">ตะกร้า 🛒 <span id="cart-count">0</span></a>
+        <a href="login.html" class="login">เข้าสู่ระบบ</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <div class="page-title">
+        <h1>ตะกร้าสินค้าของคุณ 🛒</h1>
+        <p>ตรวจสอบสินค้าและจำนวนก่อนดำเนินการสั่งซื้อ</p>
+    </div>
+
+    <div class="cart-layout">
+
+        <section class="cart-box">
+            <div class="cart-header">
+                <h2>รายการสินค้า</h2>
+                <span id="item-count">0 รายการ</span>
+            </div>
+
+            <div id="cart-items"></div>
+        </section>
+
+        <aside class="summary">
+            <h2>สรุปคำสั่งซื้อ</h2>
+
+            <div class="summary-row">
+                <span>จำนวนสินค้า</span>
+                <span id="summary-count">0 ชิ้น</span>
+            </div>
+
+            <div class="summary-row">
+                <span>ราคาสินค้า</span>
+                <span id="subtotal">฿0</span>
+            </div>
+
+            <div class="summary-row">
+                <span>ค่าจัดส่ง</span>
+                <span id="shipping">฿0</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>ยอดรวม</span>
+                <span id="grand-total">฿0</span>
+            </div>
+
+            <button class="checkout" id="checkout-btn" onclick="goCheckout()">
+                ดำเนินการสั่งซื้อ →
+            </button>
+
+            <div class="secure">
+                🔒 ข้อมูลคำสั่งซื้อจะถูกใช้เพื่อดำเนินการจัดส่ง
+            </div>
+
+            <a href="index.html" class="continue" style="display:block;text-align:center">
+                ← เลือกซื้อสินค้าต่อ
+            </a>
+        </aside>
+
+    </div>
+
+</main>
+
+<footer>
+    <div class="logo">♡ Phone Sticker Store</div>
+    <p>อุปกรณ์สร้างคอนเทนต์ที่ทำให้ทุกที่เป็นสตูดิโอของคุณ</p>
+    <small>© 2026 Phone Sticker Store. All rights reserved.</small>
+</footer>
+
+<script>
+const CART_KEY = "phoneCart";
+
+const productImages = {
+    p1: "https://placehold.co/500x400/ffe4f0/d979a7?text=Phone+Sticker",
+    p2: "https://placehold.co/500x400/fce8f2/d979a7?text=Phone+Stand",
+    p3: "https://placehold.co/500x400/ffeaf4/d979a7?text=Mini+Light",
+    p4: "https://placehold.co/500x400/fdebf3/d979a7?text=Wireless+Mic"
+};
+
+// อ่านข้อมูลตะกร้า
+function getCart() {
+    try {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(cart) ? cart : [];
+    } catch {
+        return [];
+    }
+}
+
+// บันทึกข้อมูล
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    renderCart();
+}
+
+// จัดรูปแบบเงินบาท
+function money(amount) {
+    return "฿" + amount.toLocaleString("th-TH");
+}
+
+// แสดงตะกร้า
+function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById("cart-items");
+
+    container.innerHTML = "";
+
+    let subtotal = 0;
+    let totalQuantity = 0;
+
+    if (cart.length === 0) {
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">🛍️</div>
+                <h2>ตะกร้าของคุณยังว่างอยู่</h2>
+                <p>ลองเลือกสินค้าเก๋ ๆ สำหรับการสร้างคอนเทนต์ดูสิ</p>
+                <a href="index.html" class="continue">เริ่มเลือกซื้อสินค้า</a>
+            </div>
+        `;
+    }
+
+    cart.forEach((item, index) => {
+        const price = Number(item.price) || 0;
+        const quantity = Math.max(0, Number(item.quantity) || 0);
+        const total = price * quantity;
+
+        subtotal += total;
+        totalQuantity += quantity;
+
+        const image = productImages[item.id] ||
+            "https://placehold.co/500x400/ffe4f0/d979a7?text=Product";
+
+        const element = document.createElement("div");
+        element.className = "cart-item";
+
+        element.innerHTML = `
+            <img src="${image}" alt="สินค้า">
+            <div class="item-info">
+                <h3></h3>
+                <p>${money(price)}</p>
+                <div class="quantity">
+                    <button onclick="changeQuantity(${index}, -1)">−</button>
+                    <span>${quantity}</span>
+                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                </div>
+            </div>
+            <div class="item-actions">
+                <div class="item-total">${money(total)}</div>
+                <button class="remove" onclick="removeItem(${index})">
+                    ลบสินค้า ✕
+                </button>
+            </div>
+        `;
+
+        element.querySelector("h3").textContent = item.name;
+        container.appendChild(element);
+    });
+
+    // ตัวอย่างค่าจัดส่ง: ฟรีเมื่อซื้อครบ 500 บาท
+    const shipping = subtotal === 0 || subtotal >= 500 ? 0 : 40;
+    const grandTotal = subtotal + shipping;
+
+    document.getElementById("cart-count").textContent = totalQuantity;
+    document.getElementById("item-count").textContent =
+        cart.length + " รายการ";
+
+    document.getElementById("summary-count").textContent =
+        totalQuantity + " ชิ้น";
+
+    document.getElementById("subtotal").textContent = money(subtotal);
+    document.getElementById("shipping").textContent =
+        shipping === 0 ? "ฟรี" : money(shipping);
+
+    document.getElementById("grand-total").textContent =
+        money(grandTotal);
+
+    document.getElementById("checkout-btn").disabled = cart.length === 0;
+}
+
+// เพิ่ม / ลดจำนวน
+function changeQuantity(index, amount) {
+    const cart = getCart();
+
+    if (!cart[index]) return;
+
+    const next = cart[index].quantity + amount;
+
+    if (next <= 0) {
+        removeItem(index);
+        return;
+    }
+
+    cart[index].quantity = next;
+    saveCart(cart);
+}
+
+// ลบสินค้า
+function removeItem(index) {
+    const cart = getCart();
+
+    if (!cart[index]) return;
+
+    const confirmed = confirm(
+        "ต้องการลบ " + cart[index].name + " ออกจากตะกร้าหรือไม่?"
+    );
+
+    if (!confirmed) return;
+
+    cart.splice(index, 1);
+    saveCart(cart);
+}
+
+// ไปหน้าชำระเงิน
+function goCheckout() {
+    const cart = getCart();
+
+    if (cart.length === 0) {
+        alert("กรุณาเลือกสินค้าก่อน");
+        return;
+    }
+
+    window.location.href = "checkout.html";
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
