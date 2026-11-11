@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบ | Phone Sticker Store</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff7fb, #fff 55%, #fff0f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      color: #333;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 950px;
+      min-height: 580px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(220, 100, 150, .12);
+    }
+
+    .visual {
+      background: linear-gradient(145deg, #f9b8d3, #f5d4e4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 45px;
+      text-align: center;
+      color: #713b55;
+    }
+
+    .visual-icon {
+      width: 150px;
+      height: 150px;
+      border-radius: 40px;
+      background: rgba(255,255,255,.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 65px;
+      margin-bottom: 30px;
+      transform: rotate(-7deg);
+    }
+
+    .visual h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .visual p {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: .85;
+    }
+
+    .form-section {
+      padding: 55px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand {
+      font-size: 21px;
+      font-weight: 600;
+      color: #df78a6;
+      margin-bottom: 35px;
+    }
+
+    .brand span {
+      color: #333;
+    }
+
+    .form-section h1 {
+      font-size: 29px;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .subtitle {
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 50px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 0 45px 0 15px;
+      font-size: 14px;
+      outline: none;
+      transition: .2s;
+      background: #fff;
+    }
+
+    .input-box input:focus {
+      border-color: #e99abc;
+      box-shadow: 0 0 0 3px rgba(233,154,188,.12);
+    }
+
+    .input-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #bbb;
+      cursor: pointer;
+    }
+
+    .forgot {
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 22px;
+    }
+
+    .forgot button {
+      border: none;
+      background: none;
+      color: #df78a6;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: 12px;
+      background: #e88fb5;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .login-btn:hover {
+      background: #dc78a4;
+      transform: translateY(-1px);
+    }
+
+    .login-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      color: #c44;
+    }
+
+    .message.success {
+      display: block;
+      background: #effaf2;
+      color: #27834a;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .register-link a {
+      color: #df78a6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-home a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .login-container {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+      }
+
+      .visual {
+        padding: 25px;
+        min-height: 190px;
+      }
+
+      .visual-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 32px;
+        border-radius: 22px;
+        margin-bottom: 12px;
+      }
+
+      .visual h2 {
+        font-size: 21px;
+      }
+
+      .visual p {
+        font-size: 12px;
+      }
+
+      .form-section {
+        padding: 35px 25px;
+      }
+
+      .brand {
+        margin-bottom: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="login-container">
+
+    <section class="visual">
+      <div class="visual-icon">
+        <i class="fa-solid fa-camera"></i>
+      </div>
+      <h2>Welcome Back!</h2>
+      <p>
+        กลับมาสร้างสรรค์ช่วงเวลาสวย ๆ
+        ไปพร้อมกับ Phone Sticker Store
+      </p>
+    </section>
+
+    <section class="form-section">
+
+      <div class="brand">
+        <i class="fa-solid fa-heart"></i>
+        Phone <span>Sticker Store</span>
+      </div>
+
+      <h1>เข้าสู่ระบบ</h1>
+      <p class="subtitle">ยินดีต้อนรับกลับมา เข้าสู่บัญชีของคุณ</p>
+
+      <div id="message" class="message"></div>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="email">อีเมล</label>
+          <div class="input-box">
+            <input
+              type="email"
+              id="email"
+              placeholder="example@email.com"
+              autocomplete="email"
+              required
+            >
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">รหัสผ่าน</label>
+          <div class="input-box">
+            <input
+              type="password"
+              id="password"
+              placeholder="กรอกรหัสผ่าน"
+              autocomplete="current-password"
+              required
+            >
+            <i
+              class="fa-regular fa-eye"
+              id="togglePassword"
+              onclick="togglePassword()"
+            ></i>
+          </div>
+        </div>
+
+        <div class="forgot">
+          <button type="button" id="forgotPassword">
+            ลืมรหัสผ่าน?
+          </button>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginBtn">
+          เข้าสู่ระบบ
+        </button>
+
+      </form>
+
+      <div class="register-link">
+        ยังไม่มีบัญชี?
+        <a href="register.html">สมัครสมาชิก</a>
+      </div>
+
+      <div class="back-home">
+        <a href="index.html">
+          <i class="fa-solid fa-arrow-left"></i>
+          กลับหน้าหลัก
+        </a>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    function togglePassword() {
+      const password = document.getElementById("password");
+      const icon = document.getElementById("togglePassword");
+
+      if (password.type === "password") {
+        password.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+      } else {
+        password.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { initializeApp, getApps } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged
+    } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = getApps().length
+      ? getApps()[0]
+      : initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
+    const forgotPasswordBtn = document.getElementById("forgotPassword");
+
+    function showMessage(text, type = "error") {
+      message.textContent = text;
+      message.className = "message " + type;
+    }
+
+    function getErrorMessage(errorCode) {
+      const errors = {
+        "auth/invalid-email": "รูปแบบอีเมลไม่ถูกต้อง",
+        "auth/user-not-found": "ไม่พบบัญชีผู้ใช้นี้",
+        "auth/wrong-password": "รหัสผ่านไม่ถูกต้อง",
+        "auth/invalid-credential": "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
+        "auth/user-disabled": "บัญชีนี้ถูกระงับการใช้งาน",
+        "auth/too-many-requests": "ลองเข้าสู่ระบบหลายครั้งเกินไป กรุณารอสักครู่",
+        "auth/network-request-failed": "ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้",
+        "auth/operation-not-allowed": "กรุณาเปิดใช้งาน Email/Password ใน Firebase"
+      };
+
+      return errors[errorCode] || "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง";
+    }
+
+    // หากเข้าสู่ระบบอยู่แล้ว ให้ไปหน้าหลัก
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.replace("index.html");
+      }
+    });
+
+    // เข้าสู่ระบบ
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = "กำลังเข้าสู่ระบบ...";
+      message.className = "message";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+
+        showMessage("เข้าสู่ระบบสำเร็จ กำลังพาคุณไปหน้าหลัก...", "success");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 700);
+
+      } catch (error) {
+        showMessage(getErrorMessage(error.code));
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = "เข้าสู่ระบบ";
+      }
+    });
+
+    // ลืมรหัสผ่าน
+    forgotPasswordBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+
+      if (!email) {
+        showMessage("กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน");
+        document.getElementById("email").focus();
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        showMessage("ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลแล้ว กรุณาตรวจสอบกล่องจดหมาย", "success");
+      } catch (error) {
+        showMessage(getErrorMessage(error.code));
+      }
+    });
+  </script>
+
+</body>
+</html>
